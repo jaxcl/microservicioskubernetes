@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deployment
+  labels:
+    app: php-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-deployment
+  template:
+    metadata:
+      labels:
+        app: php-deployment
+    spec:
+      containers:
+      - name: php-deployment
+        image: phpmyadmin/phpmyadmin:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: PMA_HOST
+          value: mysql
+        - name: MYSQL_ROOT_PASSWORD
+          value: example_password
+       
